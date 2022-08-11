@@ -218,11 +218,12 @@ queryBtn.addEventListener('click', query)
 // CODE HERE 
 function createFood(event) {
     event.preventDefault()
+    console.log('hey')
     let foodInput = document.querySelector('#food-text')
     let body = {
-        newFood: foodInput
+        newFood: foodInput.value
     }
-    axios.post('http://localhost:3000/food', {body})
+    axios.post('http://localhost:3000/food', body)
     .then((response) => {
         data = response.data
         console.log(data)
@@ -231,4 +232,4 @@ function createFood(event) {
 
 let submitBtn = document.querySelector('#submit-button')
 
-submitBtn.addEventListener('submit', createFood)
+submitBtn.addEventListener('click', createFood)
