@@ -216,20 +216,49 @@ queryBtn.addEventListener('click', query)
 */
 
 // CODE HERE 
+
+let foodContainer = document.querySelector('section')
+let foodInput = document.querySelector('#food-text')
+
+function clearFood() {
+    foodContainer.innerHTML = ``
+}
+
 function createFood(event) {
     event.preventDefault()
-    console.log('hey')
-    let foodInput = document.querySelector('#food-text')
+    clearFood()
     let body = {
-        newFood: foodInput.value
+        newFood: ` ${foodInput.value}`
     }
     axios.post('http://localhost:3000/food', body)
     .then((response) => {
         data = response.data
-        console.log(data)
+        newP = document.createElement('p')
+        newP.textContent = data
+        foodContainer.appendChild(newP)
     })
+    foodInput.value = ''
 }
 
+let enterBtn = document.querySelector('#submit-form')
 let submitBtn = document.querySelector('#submit-button')
 
+enterBtn.addEventListener('submit', createFood)
 submitBtn.addEventListener('click', createFood)
+
+// const createFood = (event) =>{
+//     event.preventDefault()
+//     const foodInput = document.querySelector('#food-text')
+//     const body = {
+//         newFood: foodInput.value
+//     }
+//     axios.post("http://localhost:3000/food", body)
+//     .then((response) =>{
+//         console.log(response.data)
+//         const newP = document.createElement('p')
+//         newP.textContent = response.data[response.data.length - 1]
+//         document.querySelector('body').appendChild(newP)
+//     })
+// }
+
+// const submitBtn = document.querySelector('#submit-form').addEventListener('click', createFood)
